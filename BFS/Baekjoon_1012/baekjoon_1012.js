@@ -17,7 +17,27 @@ for (let i = 0; i < testCase; i++) {
 		map[y][x] = 1;
 	}
 	const bfs = () => {
-
+		let bug = 0;
+		for (let i = 0; i < ver; i++) {
+			for (let j = 0; j < hor; j++) {
+				 if (visited[i][j] === 0 && map[i][j] === 1) {
+					bug++;
+					queue.push([i, j]);
+					visited[i][j] = 1;
+					while (queue.length) {
+						const [y, x] = queue.shift();
+						for (let i = 0; i < 4; i++) {
+							const [dx, dy] = [x + direction[i][0], y + direction[i][1]];
+							if (dx > -1 && dx < hor && dy > -1 && dy < ver && map[dy][dx] === 1 && visited[dy][dx] === 0) {
+								queue.push([dy, dx]);
+								visited[dy][dx] = 1;
+							}
+						}
+					}
+				 }
+			}
+		}
+		return (bug);
 	}
 	console.log(bfs([0, 0]));
 }
