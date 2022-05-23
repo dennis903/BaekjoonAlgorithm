@@ -1,4 +1,4 @@
-let input = require('fs').readFileSync('input.txt').toString().trim("").split('\n');
+let input = require('fs').readFileSync('input.txt').toString().trim().split('\n');
 const [N, M] = input.shift().split(" ").map(e => +e);
 const graph = [...new Array(N + 1)].map(() => []);
 const visited = Array(N + 1).fill(false);
@@ -23,8 +23,8 @@ const dfs = (start) => {
 
 for (let i = 1; i <= N; i++) {
 	if (!visited[i]) {
-		dfs(i);
 		count++;
+		dfs(i);
 	}
 }
 console.log(count);
