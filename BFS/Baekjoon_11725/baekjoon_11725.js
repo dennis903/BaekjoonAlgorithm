@@ -5,18 +5,15 @@ let input = require("fs")
   .split("\n");
 
 const N = +input.shift();
-const graph = [...new Array(N + 1)].map(() => []);
 const queue = [];
 let check = [];
 let result = "";
 
-for (let i = 0; i < N - 1; i++) {
-  const [from, to] = input
-    .shift()
-    .split(" ")
-    .map((e) => +e);
-  graph[from].push(to);
-  graph[to].push(from);
+input = input.map((v) => v.split(" ").map(Number));
+let graph = Array.from({ length: +N + 1 }, () => Array());
+for (let [x, y] of input) {
+  graph[x].push(y);
+  graph[y].push(x);
 }
 
 const bfs = () => {
